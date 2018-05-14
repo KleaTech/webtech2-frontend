@@ -1,0 +1,32 @@
+<div class="container container-main">
+  <div class="row row-outlined">
+    <div class="col-xs-5">
+      <h1>Bartenders:</h1>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let bart of bartenders" (click)="orderChild.getOrders(bart._id)" style="cursor: pointer">
+          <h2>{{ bart.name }}</h2>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-7">
+      <app-order #orderChild [view]="'bartender'"></app-order>
+    </div>
+  </div>
+  <hr/>
+  <div class="row row-outlined">
+    <div class="col-xs-12">
+      <H2>Add bartender</H2>
+      <div class="form-group row">
+        <div class="col-xs-3">
+          <label for="name">Name: </label>
+          <div class="input-group">
+            <input id="name" type="text" class="form-control" [(ngModel)]="name">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" (click)="onAddClicked()">Add</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

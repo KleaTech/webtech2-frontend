@@ -1,0 +1,128 @@
+<div class="container container-main">
+  <div class="row row-outlined">
+    <div class="col-xs-12 col-lg-4">
+      <h1>Foods:</h1>
+      <button class="btn btn-success" (click)="addingFood=addingFood==false">Add food</button>
+      <div *ngIf="addingFood">
+          <div class="row row-outlined">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="foodname">Name: </label>
+                <input type="text" id="foodname" [(ngModel)]="foodName" class="form-control"/>
+                <label for="foodprice">Price: </label>
+                <input type="number" id="foodprice" [(ngModel)]="foodPrice"  class="form-control"/>
+                <label for="foodingredients">Ingredients (comma separated)</label>
+                <input type="text" id="foodingredients" [(ngModel)]="foodIngredients" class="form-control"/>
+                <button class="btn btn-primary form-control" (click)="onFoodAddClicked()">Add</button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let food of foods">
+          <div class="row">
+            <div class="col-xs-10">
+              <h2>{{ food.name }}</h2>
+              Price: {{ food.price }}Ft <br/>
+              Ingredients: <br/>
+              <ul>
+                <li *ngFor="let ingredient of food.ingredients">
+                  {{ ingredient }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-2">
+              <br/>
+              <button type="button" class="btn btn-default" (click)="onDeleteClicked(food._id)">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+              </button>
+              <button type="button" class="btn btn-default" (click)="onBasketClicked(food)">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <h1>Drinks:</h1>
+      <button class="btn btn-success" (click)="addingDrink=addingDrink==false">Add drink</button>
+      <div *ngIf="addingDrink">
+        <div class="row row-outlined">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="drinkName">Name: </label>
+              <input type="text" id="drinkName" [(ngModel)]="drinkName" class="form-control"/>
+              <label for="drinkPrice">Price: </label>
+              <input type="number" id="drinkPrice" [(ngModel)]="drinkPrice"  class="form-control"/>
+              <label for="drinkIngredients">Ingredients (comma separated)</label>
+              <input type="text" id="drinkIngredients" [(ngModel)]="drinkIngredients" class="form-control"/>
+              <button class="btn btn-primary form-control" (click)="onDrinkAddClicked()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let drink of drinks">
+          <div class="row">
+            <div class="col-xs-10">
+              <h2>{{ drink.name }}</h2>
+              Price: {{ drink.price }}Ft <br/>
+              Ingredients: <br/>
+              <ul>
+                <li *ngFor="let ingredient of drink.ingredients">
+                  {{ ingredient }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-2">
+              <br/>
+              <button type="button" class="btn btn-default" (click)="onDeleteClicked(drink._id)">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+              </button>
+              <button type="button" class="btn btn-default" (click)="onBasketClicked(drink)">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <h1>Order:</h1>
+      <button class="btn btn-success" (click)="finalizing=finalizing==false" [disabled]="disableFinalizing">Finalize order</button>
+      <div *ngIf="finalizing">
+        <div class="row row-outlined">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="sel1">Select customer:</label>
+                <select class="form-control" id="sel1" [(ngModel)]="order.customer">
+                  <option *ngFor="let cust of customers" [ngValue]="cust">{{ cust.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sel2">Select bartender:</label>
+                <select class="form-control" id="sel2" [(ngModel)]="order.bartender">
+                  <option *ngFor="let bart of bartenders" [ngValue]="bart">{{ bart.name }}</option>
+                </select>
+              </div>
+              <button class="btn btn-primary form-control" (click)="onOrderClicked()">Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngFor="let food of order.foods">
+        <div class="col-xs-10">
+          <h4>{{ food.name }}</h4>
+        </div>
+        <div class="col-xs-2">
+          <br/>
+          <button type="button" class="btn btn-default" (click)="onRemoveFromOrderClicked(food)">
+            <span class="glyphicon glyphicon-remove-sign"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
